@@ -6,14 +6,18 @@ import {
 	TouchableOpacity,
 	TextInput
 } from 'react-native';
+import { connect } from 'react-redux';
+import { login } from '../store/actions/user';
 
-export default class Login extends Component {
+class Login extends Component {
 	state = {
+		name: 'Temporário',
 		email: '',
 		password: ''
 	};
 
 	login = () => {
+		this.props.onLogin(this.state);
 		this.props.navigation.navigate('Profile');
 	};
 
@@ -49,6 +53,17 @@ export default class Login extends Component {
 		);
 	}
 }
+
+const mapDispatchToProps = dispatch => {
+	return {
+		onLogin: user => dispatch(login(user))
+	};
+};
+
+export default connect(
+	null,
+	mapDispatchToProps
+)(Login);
 
 const styles = StyleSheet.create({
 	container: {

@@ -5,9 +5,18 @@ if (__DEV__) {
 	console.disableYellowBox = true;
 }
 
+import React from 'react';
+import { Provider } from 'react-redux';
 import { AppRegistry } from 'react-native';
 import { name as appName } from './app.json';
-import { Feed } from './src/screens/Feed';
 import { MenuNavigator } from './src/Navigator.js';
 
-AppRegistry.registerComponent(appName, () => MenuNavigator);
+import storeConfig from './src/store/storeConfig.js';
+
+const store = storeConfig();
+const Redux = () => (
+	<Provider store={store}>
+		<MenuNavigator />
+	</Provider>
+);
+AppRegistry.registerComponent(appName, () => Redux);
