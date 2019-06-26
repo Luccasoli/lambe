@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, FlatList } from 'react-native';
-import { Header } from '../components/Header';
+import Header from '../components/Header';
 import Post from '../components/Post';
 
 class Feed extends Component {
