@@ -1,8 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, Platform, Image } from 'react-native';
-import icon from '../../assets/imgs/icon.png';
 import { Gravatar } from 'react-native-gravatar';
 import { connect } from 'react-redux';
+import icon from '../../assets/imgs/icon.png';
 
 class Header extends Component {
 	render() {

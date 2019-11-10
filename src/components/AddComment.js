@@ -16,20 +16,22 @@ export default class AddComment extends Component {
 	};
 
 	handleAddComment = () => {
-		Alert.alert('Adicionado', this.state.comment);
+		const { comment } = this.state;
+		Alert.alert('Adicionado', comment);
 	};
 
 	render() {
+		const { comment, editMode } = this.state;
 		let commentArea = null;
-		if (this.state.editMode) {
+		if (editMode) {
 			commentArea = (
 				<View style={styles.container}>
 					<TextInput
 						placeholder="Escreva um comentário"
 						style={styles.input}
 						autoFocus
-						value={this.state.comment}
-						onChangeText={comment => this.setState({ comment })}
+						value={comment}
+						onChangeText={text => this.setState({ comment: text })}
 						onSubmitEditing={this.handleAddComment}
 					/>
 					<TWF onPress={() => this.setState({ editMode: false })}>

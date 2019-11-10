@@ -1,11 +1,8 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
-import {
-	Text,
-	StyleSheet,
-	View,
-	TouchableOpacity,
-	TextInput
-} from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
+import Input from '../components/Input';
 
 export default class Register extends Component {
 	state = {
@@ -21,23 +18,20 @@ export default class Register extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<TextInput
+				<Input
 					placeholder="Nome"
-					style={styles.input}
 					autoFocus
 					value={this.state.name}
 					onChangeText={name => this.setState({ name })}
 				/>
-				<TextInput
+				<Input
 					placeholder="Email"
-					style={styles.input}
 					keyboardType="email-address"
 					value={this.state.email}
 					onChangeText={email => this.setState({ email })}
 				/>
-				<TextInput
+				<Input
 					placeholder="Senha"
-					style={styles.input}
 					secureTextEntry
 					keyboardType="email-address"
 					value={this.state.password}
@@ -50,6 +44,12 @@ export default class Register extends Component {
 		);
 	}
 }
+
+Register.propTypes = {
+	navigation: PropTypes.shape({
+		navigate: PropTypes.func.isRequired
+	}).isRequired
+};
 
 const styles = StyleSheet.create({
 	container: {
@@ -65,13 +65,5 @@ const styles = StyleSheet.create({
 	buttomText: {
 		fontSize: 20,
 		color: 'white'
-	},
-	input: {
-		width: '90%',
-		marginTop: 10,
-		backgroundColor: '#eee',
-		height: 40,
-		borderWidth: 1,
-		borderColor: '#333'
 	}
 });

@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { Gravatar } from 'react-native-gravatar';
+import PropTypes from 'prop-types';
 
-export default props => {
+const Author = props => {
 	const { email, nickname } = props;
 	return (
 		<View style={styles.container}>
@@ -11,6 +12,13 @@ export default props => {
 		</View>
 	);
 };
+
+Author.propTypes = {
+	email: PropTypes.string.isRequired,
+	nickname: PropTypes.string.isRequired
+};
+
+export default Author;
 
 const styles = StyleSheet.create({
 	container: {

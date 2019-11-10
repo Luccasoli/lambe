@@ -1,5 +1,6 @@
+/* eslint-disable global-require */
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import Header from '../components/Header';
 import Post from '../components/Post';
 
@@ -33,11 +34,12 @@ class Feed extends Component {
 	};
 
 	render() {
+		const { posts } = this.state;
 		return (
 			<View style={styles.container}>
 				<Header />
 				<FlatList
-					data={this.state.posts}
+					data={posts}
 					keyExtractor={item => item.id.toString()}
 					renderItem={({ item }) => <Post {...item} />}
 				/>
@@ -46,7 +48,7 @@ class Feed extends Component {
 	}
 }
 
-export { Feed };
+export default Feed;
 
 const styles = StyleSheet.create({
 	container: {

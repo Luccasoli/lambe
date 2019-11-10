@@ -1,3 +1,7 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, Alert, Dimensions } from 'react-native';
 
@@ -23,11 +27,12 @@ export default class Comments extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		margin: 10,
+		margin: 10
 	},
 	commentContainer: {
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
+		marginBottom: 10,
 		alignItems: 'center'
 	},
 	nickname: {

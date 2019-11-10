@@ -6,7 +6,7 @@ import {
 	createStackNavigator
 } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Feed } from './screens/Feed';
+import Feed from './screens/Feed';
 import AddPhoto from './screens/AddPhoto';
 import Profile from './screens/Profile';
 import Login from './screens/Login';
@@ -28,7 +28,7 @@ const authRouter = createStackNavigator(
 
 const loginOrProfileRouter = createSwitchNavigator(
 	{
-		Profile: Profile,
+		Profile,
 		Auth: authRouter
 	},
 	{
@@ -79,4 +79,4 @@ const MenuConfig = {
 const MenuNavigator = createAppContainer(
 	createBottomTabNavigator(MenuRoutes, MenuConfig)
 );
-export { MenuNavigator };
+export default MenuNavigator;

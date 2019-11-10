@@ -1,13 +1,10 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
-import {
-	Text,
-	StyleSheet,
-	View,
-	TouchableOpacity,
-	TextInput
-} from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { login } from '../store/actions/user';
+import Input from '../components/Input';
 
 class Login extends Component {
 	state = {
@@ -24,7 +21,7 @@ class Login extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<TextInput
+				<Input
 					placeholder="Email"
 					style={styles.input}
 					autoFocus
@@ -32,7 +29,7 @@ class Login extends Component {
 					value={this.state.email}
 					onChangeText={email => this.setState({ email })}
 				/>
-				<TextInput
+				<Input
 					placeholder="Senha"
 					style={styles.input}
 					secureTextEntry
@@ -53,6 +50,13 @@ class Login extends Component {
 		);
 	}
 }
+
+Login.propTypes = {
+	navigation: PropTypes.shape({
+		navigate: PropTypes.func.isRequired
+	}).isRequired,
+	onLogin: PropTypes.func.isRequired
+};
 
 const mapDispatchToProps = dispatch => {
 	return {
@@ -79,13 +83,5 @@ const styles = StyleSheet.create({
 	buttomText: {
 		fontSize: 20,
 		color: 'white'
-	},
-	input: {
-		width: '90%',
-		marginTop: 10,
-		backgroundColor: '#eee',
-		height: 40,
-		borderWidth: 1,
-		borderColor: '#333'
 	}
 });

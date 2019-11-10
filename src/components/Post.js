@@ -1,5 +1,7 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Image, Dimensions } from 'react-native';
+import { StyleSheet, View, Image, Dimensions } from 'react-native';
+import PropTypes from 'prop-types';
 import Author from './Author';
 import Comments from './Comments';
 import AddComment from './AddComment';
@@ -18,9 +20,21 @@ export default class Post extends Component {
 	}
 }
 
+Post.propTypes = {
+	comments: PropTypes.arrayOf(
+		PropTypes.shape({
+			nickname: PropTypes.string,
+			comment: PropTypes.string.isRequired
+		})
+	).isRequired,
+	email: PropTypes.string.isRequired,
+	image: PropTypes.string.isRequired,
+	nickname: PropTypes.string.isRequired
+};
+
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		flex: 1
 	},
 	image: {
 		width: '100%',
