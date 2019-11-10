@@ -9,11 +9,13 @@ import {
 	Image,
 	Dimensions,
 	Platform,
-	ScrollView,
-	Alert
+	SafeAreaView,
+	Alert,
+	Button
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { connect } from 'react-redux';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 import { addPost } from '../redux/posts';
 
 class AddPhoto extends Component {
@@ -60,31 +62,66 @@ class AddPhoto extends Component {
 	};
 
 	render() {
+		const { name, navigation } = this.props;
 		return (
-			<ScrollView>
-				<View style={styles.container}>
-					<Text style={styles.title}> Compartilhe uma Imagem </Text>
-					<View style={styles.imageContainer}>
-						<Image
-							resizeMode="center"
-							style={styles.image}
-							source={this.state.image}
-						/>
-					</View>
-					<TouchableOpacity onPress={this.pickImage} style={styles.button}>
-						<Text style={styles.buttomText}>Escolha a foto</Text>
-					</TouchableOpacity>
-					<TextInput
-						style={styles.input}
-						placeholder="Faça um comentário.. "
-						value={this.state.comment}
-						onChangeText={comment => this.setState({ comment })}
+			<SafeAreaView style={styles.container}>
+				<Text style={styles.title}> Compartilhe uma Imagem </Text>
+				<View style={styles.imageContainer}>
+					<Image
+						resizeMode="center"
+						style={styles.image}
+						source={this.state.image}
 					/>
-					<TouchableOpacity onPress={this.save} style={styles.button}>
-						<Text style={styles.buttomText}>Salvar</Text>
-					</TouchableOpacity>
 				</View>
-			</ScrollView>
+				<TouchableOpacity onPress={this.pickImage} style={styles.button}>
+					<Text style={styles.buttomText}>Escolha a foto</Text>
+				</TouchableOpacity>
+				<TextInput
+					placeholderTextColor="gray"
+					style={styles.input}
+					placeholder="Faça um comentário.. "
+					value={this.state.comment}
+					onChangeText={comment => this.setState({ comment })}
+				/>
+				<TouchableOpacity onPress={this.save} style={styles.button}>
+					<Text style={styles.buttomText}>Salvar</Text>
+				</TouchableOpacity>
+				{!name && (
+					<SafeAreaView
+						style={{
+							position: 'absolute',
+							flex: 1,
+							justifyContent: 'center',
+							alignItems: 'center',
+							backgroundColor: 'rgba(0,0,0,0.5)',
+							height: Dimensions.get('window').height,
+							width: Dimensions.get('window').width
+						}}
+					>
+						<View>
+							<TouchableHighlight
+								style={{
+									borderRadius: 10
+								}}
+								onPress={() => navigation.navigate('Profile')}
+							>
+								<View
+									style={{
+										backgroundColor: 'white',
+										overflow: 'hidden',
+										padding: 20,
+										borderRadius: 10
+									}}
+								>
+									<Text style={{ fontSize: 20, color: '#4286f4' }}>
+										Realizar Login
+									</Text>
+								</View>
+							</TouchableHighlight>
+						</View>
+					</SafeAreaView>
+				)}
+			</SafeAreaView>
 		);
 	}
 }
@@ -131,6 +168,7 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		marginTop: 20,
-		width: '90%'
+		width: '90%',
+		fontSize: 15
 	}
 });

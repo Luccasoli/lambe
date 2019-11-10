@@ -2,25 +2,31 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Author from './Author';
 import Comments from './Comments';
 import AddComment from './AddComment';
 
-export default class Post extends Component {
+class Post extends Component {
 	render() {
-		const { image, comments, nickname, email, id } = this.props;
+		const { image, comments, nickname, email, id, name } = this.props;
 		return (
 			<View style={styles.container}>
 				<Image resizeMode="cover" source={image} style={styles.image} />
 				<Author nickname={nickname} email={email} />
 				<Comments comments={comments} />
-				<AddComment postId={id} />
+				{name && <AddComment postId={id} />}
 			</View>
 		);
 	}
 }
 
+const mapStateToProps = ({ user }) => user;
+
+export default connect(mapStateToProps)(Post);
+
 Post.propTypes = {
+	name: PropTypes.string.isRequired,
 	id: PropTypes.number.isRequired,
 	comments: PropTypes.arrayOf(
 		PropTypes.shape({
