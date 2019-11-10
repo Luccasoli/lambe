@@ -2,24 +2,27 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Gravatar } from 'react-native-gravatar';
 import { connect } from 'react-redux';
-import { logout } from '../store/actions/user';
+import PropTypes from 'prop-types';
+import { logout } from '../redux/user';
 
 class Profile extends Component {
 	logout = () => {
-		this.props.onLogout();
-		this.props.navigation.navigate('Auth');
+		const { onLogout, navigation } = this.props;
+		onLogout();
+		navigation.navigate('Auth');
 	};
 
 	render() {
+		const { email, name } = this.props;
 		const options = {
-			email: this.props.email,
+			email,
 			secure: true
 		};
 		return (
 			<View style={styles.container}>
 				<Gravatar style={styles.avatar} options={options} />
-				<Text style={styles.nickname}>{this.props.name}</Text>
-				<Text style={styles.email}>{this.props.email}</Text>
+				<Text style={styles.nickname}>{name}</Text>
+				<Text style={styles.email}>{email}</Text>
 				<TouchableOpacity onPress={this.logout} style={styles.button}>
 					<Text style={styles.buttomText}>Sair</Text>
 				</TouchableOpacity>
@@ -27,6 +30,15 @@ class Profile extends Component {
 		);
 	}
 }
+
+Profile.propTypes = {
+	email: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	navigation: PropTypes.shape({
+		navigate: PropTypes.func.isRequired
+	}).isRequired,
+	onLogout: PropTypes.func.isRequired
+};
 
 const mapStateToProps = ({ user }) => {
 	return user;

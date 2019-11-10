@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { login } from '../store/actions/user';
+import { login } from '../redux/user';
 import Input from '../components/Input';
 
 class Login extends Component {

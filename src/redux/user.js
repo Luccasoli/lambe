@@ -1,4 +1,14 @@
-import { USER_LOGGED_IN, USER_LOGGED_OUT } from '../actions/actionTypes';
+export const USER_LOGGED_IN = 'USER_LOGGED_IN';
+export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
+
+export const login = user => ({
+	type: USER_LOGGED_IN,
+	payload: user
+});
+
+export const logout = () => ({
+	type: USER_LOGGED_OUT
+});
 
 const initialState = {
 	name: null,

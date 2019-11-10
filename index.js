@@ -4,7 +4,7 @@ import { AppRegistry } from 'react-native';
 import { name as appName } from './app.json';
 import MenuNavigator from './src/Navigator';
 
-import storeConfig from './src/store/storeConfig';
+import storeConfig from './src/redux/storeConfig';
 
 if (__DEV__) {
 	import('./src/config/ReactotronConfig').then(() =>

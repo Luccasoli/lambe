@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable global-require */
 import React, { Component } from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, KeyboardAvoidingView } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
@@ -11,14 +11,14 @@ class Feed extends Component {
 	render() {
 		const { posts } = this.props;
 		return (
-			<View style={styles.container}>
+			<KeyboardAvoidingView behavior="height" style={styles.container}>
 				<Header />
 				<FlatList
 					data={posts}
 					keyExtractor={item => item.id.toString()}
-					renderItem={({ item }) => <Post {...item} />}
+					renderItem={({ item }) => <Post key={item.id} {...item} />}
 				/>
-			</View>
+			</KeyboardAvoidingView>
 		);
 	}
 }
@@ -27,7 +27,7 @@ Feed.propTypes = {
 	posts: PropTypes.array.isRequired
 };
 
-const mapStateToProps = ({ posts }) => ({ ...posts });
+const mapStateToProps = ({ posts }) => posts;
 
 export default connect(
 	mapStateToProps,

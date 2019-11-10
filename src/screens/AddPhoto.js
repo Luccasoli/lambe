@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { connect } from 'react-redux';
-import { addPost } from '../store/actions/posts';
+import { addPost } from '../redux/posts';
 
 class AddPhoto extends Component {
 	state = {
@@ -89,9 +89,7 @@ class AddPhoto extends Component {
 	}
 }
 
-const mapStateToProps = ({ user }) => ({
-	...user
-});
+const mapStateToProps = ({ user }) => user;
 
 const mapDispatchToProps = dispatch => ({
 	onAddPost: post => dispatch(addPost(post))

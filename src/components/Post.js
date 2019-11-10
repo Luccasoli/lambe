@@ -8,19 +8,20 @@ import AddComment from './AddComment';
 
 export default class Post extends Component {
 	render() {
-		const { image, comments, nickname, email } = this.props;
+		const { image, comments, nickname, email, id } = this.props;
 		return (
 			<View style={styles.container}>
 				<Image resizeMode="cover" source={image} style={styles.image} />
 				<Author nickname={nickname} email={email} />
 				<Comments comments={comments} />
-				<AddComment />
+				<AddComment postId={id} />
 			</View>
 		);
 	}
 }
 
 Post.propTypes = {
+	id: PropTypes.number.isRequired,
 	comments: PropTypes.arrayOf(
 		PropTypes.shape({
 			nickname: PropTypes.string,
