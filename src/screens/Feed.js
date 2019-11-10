@@ -1,40 +1,15 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable global-require */
 import React, { Component } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Post from '../components/Post';
-
+// eslint-disable-next-line react/prefer-stateless-function
 class Feed extends Component {
-	state = {
-		posts: [
-			{
-				id: Math.random(),
-				nickname: 'Rafael Pereira',
-				email: 'rafael12@gmail.com',
-				image: require('../../assets/imgs/fence.jpg'),
-				comments: [
-					{
-						nickname: 'Joaozinho Carvalho',
-						comment: 'Aí sim, papai!'
-					},
-					{
-						nickname: 'Marcos Aurélio',
-						comment: 'Cuidam man'
-					}
-				]
-			},
-			{
-				id: Math.random(),
-				nickname: 'Bruno de Sousa',
-				email: 'brunin@gmail.com',
-				image: require('../../assets/imgs/bw.jpg'),
-				comments: []
-			}
-		]
-	};
-
 	render() {
-		const { posts } = this.state;
+		const { posts } = this.props;
 		return (
 			<View style={styles.container}>
 				<Header />
@@ -48,7 +23,16 @@ class Feed extends Component {
 	}
 }
 
-export default Feed;
+Feed.propTypes = {
+	posts: PropTypes.array.isRequired
+};
+
+const mapStateToProps = ({ posts }) => ({ ...posts });
+
+export default connect(
+	mapStateToProps,
+	null
+)(Feed);
 
 const styles = StyleSheet.create({
 	container: {
